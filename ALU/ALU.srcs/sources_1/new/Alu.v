@@ -52,6 +52,18 @@ begin
         end 
         4'b0011: begin
             d_out = A / B; 
+        end
+        4'b0100: begin
+            d_out = A & B; 
+        end 
+        4'b0101: begin
+            d_out = A | B; 
+        end 
+        4'b0110: begin
+            d_out = A ^ B; 
+        end 
+        4'b0111: begin
+            d_out = !A; 
         end 
     endcase
     if(d_out == 0)

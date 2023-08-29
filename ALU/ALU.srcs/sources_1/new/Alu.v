@@ -63,7 +63,7 @@ begin
             d_out = A ^ B; 
         end 
         4'b0111: begin
-            d_out = !A; 
+            d_out = ~A; 
         end 
     endcase
     if(d_out == 0)

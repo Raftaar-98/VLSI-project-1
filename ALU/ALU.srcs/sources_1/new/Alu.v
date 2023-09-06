@@ -44,6 +44,9 @@ Carry_flag = 1'b0;
 end
 else
 begin
+d_out = 16'b0000000000000000;
+Zero_flag = 1'b0;
+Carry_flag = 1'b0;
     case(fn_sel)
         4'b0000: begin
             {Carry_flag, d_out} = A+B;
@@ -77,7 +80,7 @@ begin
         Zero_flag = 1'b1;
     else
         Zero_flag= 0;
-	Carry_flag = 1'b0;
+	
     end 
     end
 endmodule

@@ -21,12 +21,12 @@
 
 
 module Alu(
-    input [15:0] A,
-    input [15:0] B,
-    input [3:0] fn_sel,
+    input [127:0] A,
+    input [127:0] B,
+    input [5:0] fn_sel,
     input clk,
     input rst,
-    output reg [15:0] d_out,
+    output reg [127:0] d_out,
     output reg Zero_flag,
     output reg Carry_flag
     );
@@ -38,39 +38,48 @@ always @ (posedge clk)
 begin
 if(rst)
 begin
-d_out = 16'b0000000000000000;
+d_out = 128'b0;
 Zero_flag = 1'b0;
 Carry_flag = 1'b0;
 end
 else
 begin
-d_out = 16'b0000000000000000;
+d_out = 128'b0;
 Zero_flag = 1'b0;
 Carry_flag = 1'b0;
     case(fn_sel)
-        4'b0000: begin
+        6'b000000: begin
             {Carry_flag, d_out} = A+B;
         end
-        4'b0001: begin 
-            d_out = A-B;
+        6'b000001: begin 
+            d_out = A - B;
         end 
-        4'b0010: begin
+        6'b000010: begin
             d_out = A * B; 
         end 
-        4'b0011: begin
+        6'b000011: begin
             d_out = A / B; 
         end
-        4'b0100: begin
+        6'b000100: begin
             d_out = A & B; 
         end 
-        4'b0101: begin
+        6'b000101: begin
             d_out = A | B; 
         end 
-        4'b0110: begin
+        6'b000110: begin
             d_out = A ^ B; 
         end 
-        4'b0111: begin
+        6'b000111: begin
             d_out = ~A; 
+        end 
+        6'b001000: begin
+            d_out = ~B; 
+        end 
+        6'b001001: begin
+            d_out = A<<B; 
+        end 
+        6'b001010: begin
+            d_out = A>>B; 
         end 
         default:
         d_out = 0;
